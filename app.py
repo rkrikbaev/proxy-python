@@ -14,7 +14,8 @@ class DataQuery():
         
         authorization_token = None
         resp.status = falcon.HTTP_200
-        id = req.params.get('id')
+        _id = req.params.get('id')
+        
         try:
           authorization_token = login()
         except:
@@ -25,7 +26,7 @@ class DataQuery():
           payload = ''
           headers = { authorization_token }
 
-          conn.request("GET", f"/api/v1/graph/{id}", payload, headers)
+          conn.request("GET", f"/api/v1/graph/:{_id}", payload, headers)
           res = conn.getresponse()
           data = res.read()
 
@@ -42,6 +43,6 @@ class DataQuery():
 
 api = falcon.App()
 
-api.add_route('api/v1/graph/:<id>', DataQuery())
+api.add_route('api/v1/graph', DataQuery())
 
 print('Application started.')
