@@ -13,7 +13,8 @@ class DataQuery():
     def on_get(self, req, resp):
         
         resp.status = falcon.HTTP_200
-        _id = req.params.get('id') 
+        _id = req.params.get('id')
+        self._token = req.headers.get('Authorization'.upper())
         send_over = False
 
         while not bool(send_over):
@@ -25,7 +26,7 @@ class DataQuery():
                     conn.request("GET", url, payload, headers)
                     res = conn.getresponse().read()
                     send_over = True
-                    resp.media = res.decode("utf-8")
+                    resp.media = json.loads(res.decode("utf-8"))
                     
                 else:
                     try:
