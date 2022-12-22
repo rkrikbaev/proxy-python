@@ -1,4 +1,5 @@
-import falcon
+import falcon, falcon.HTTPError
+
 import time
 import os
 
@@ -18,11 +19,13 @@ class DataQuery():
         
         try:
           authorization_token = login()
-        except:
+          
+        except falcon.HTTPError as err:
+          print(err)
           self.task_state = "FORBIDDED"
           resp.status = falcon.HTTP_403
         
-        if token:  
+        if authorization_token:  
           payload = ''
           headers = { authorization_token }
 
