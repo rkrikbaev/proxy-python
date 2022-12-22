@@ -44,4 +44,4 @@ api = falcon.App()
 
 api.add_route('/graph/:<id>', DataQuery())
 
-logger.debug('Application started.')
+print('Application started.')
