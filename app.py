@@ -16,6 +16,7 @@ class DataQuery():
         resp.status = falcon.HTTP_200
         _id = req.params.get('id') 
         send_over = False
+        
         while not bool(send_over):
             try:  
                 if self._token:  
