@@ -42,6 +42,6 @@ class DataQuery():
 
 api = falcon.App()
 
-api.add_route('/graph/:<id>', DataQuery())
+api.add_route('api/v1/graph/:<id>', DataQuery())
 
 print('Application started.')
